@@ -22,25 +22,36 @@ const CreditCard = () => {
     }
 
     let [cardPAN, setCardPAN] = useState({
-        creditCardNumber: "XXXX XXXX XXXX XXXX",
+        creditCardNumber: 'null',
         name: "Olatunji Folarin",
         expirationdate: "03/24",
         securitycode: '227',
+        postalcode: '100231'
     })
+
 
     const handleSetCardPAN = (inputName, value, e) => {
         setCardPAN((prevState) => {
+            let finalValue = ''
+            if (value)
+                finalValue = value.match(/.{1,4}/g).join('/')
             return (
-                { ...prevState, [inputName]: value }
+                { ...prevState, [inputName]: finalValue }
             )
         })
     }
 
     function handleKeyPress(e) {
-        let re = /^[0-9\b]+$/
-        if (!re.test(e.key))
-            e.preventDefault()
+        console.log('pressed');
+
     }
+    // function handleKeyPress(e) {
+    //     let re = /^[0-9\b]+$/
+    //     console.log(e)
+    //     if (!re.test(e.key))
+    //         e.preventDefault()
+    //     console.log('object');
+    // }
 
 
     let [flipped, setFlipped] = useState(false)
@@ -57,11 +68,11 @@ const CreditCard = () => {
                 <div className='payment__header__types'>
                     <div className='payment__header__types____item'>
                         <input type="radio" name="cardType" id="Card" />
-                        <label htmlFor="cardType"><img src={Master} alt="Master" height={16} /></label>
+                        <label htmlFor="cardType"><img src={Master} alt="Master" height={20} /></label>
                     </div>
                     <div className='payment__header__types__item'>
                         <input type="radio" name="cardType" id="Paypal" />
-                        <label htmlFor="cardType"><img src={Paypal} alt="Paypal" height={18} /></label>
+                        <label htmlFor="cardType"><img src={Paypal} alt="Paypal" height={20} /></label>
                     </div>
 
                 </div>
@@ -174,6 +185,7 @@ const CreditCard = () => {
                             <div className="payment__body__form__form-item">
                                 <label htmlFor="creditCardNumber">Credit card number</label>
                                 <input
+                                    required
                                     onKeyPress={(e) => handleKeyPress(e)}
                                     onFocus={() => setFlipped(false)}
                                     onChange={(e) => handleSetCardPAN(e.target.name, e.target.value, e)}
@@ -184,6 +196,7 @@ const CreditCard = () => {
                             <div className="payment__body__form__form-item">
                                 <label htmlFor="expirationdate">Expiration date</label>
                                 <input
+                                    required
                                     onKeyPress={(e) => handleKeyPress(e)}
                                     onFocus={() => setFlipped(false)}
                                     onChange={(e) => handleSetCardPAN(e.target.name, e.target.value, e)}
@@ -196,15 +209,27 @@ const CreditCard = () => {
                         <div className='payment__body__form__form-group'>
                             <div className="payment__body__form__form-item">
                                 <label htmlFor="securitycode">Security code</label>
-                                <input onKeyPress={(e) => handleKeyPress(e)} onFocus={() => setFlipped(true)} onChange={(e) => handleSetCardPAN(e.target.name, e.target.value)} name='securitycode' maxLength={3} id="securitycode" type="text" pattern="[0-9]*" inputMode="numeric" placeholder={cardPAN.securitycode} />
+                                <input
+                                    required
+                                    onKeyPress={(e) => handleKeyPress(e)}
+                                    onFocus={() => setFlipped(true)}
+                                    onChange={(e) => handleSetCardPAN(e.target.name, e.target.value)}
+                                    placeholder={cardPAN.securitycode}
+                                    name='securitycode' maxLength={3} id="securitycode" type="text" pattern="[0-9]*" inputMode="numeric"
+                                />
                             </div>
                             <div className="payment__body__form__form-item">
                                 <label htmlFor="postalcode">Postal Code</label>
-                                <input onKeyPress={(e) => handleKeyPress(e)} onFocus={() => setFlipped(false)} id="postalcode" type="text" pattern="[0-9]*" inputMode="numeric" />
+                                <input
+                                    required
+                                    onKeyPress={(e) => handleKeyPress(e)}
+                                    onFocus={() => setFlipped(false)}
+                                    placeholder={cardPAN.postalcode}
+                                    id="postalcode" type="text" pattern="[0-9]*" inputMode="numeric" />
                             </div>
                         </div>
                         <div className="payment__body__form__form-item--radio">
-                            <input type="radio" name="saveCard" id="SaveCard" />
+                            <input value={cardPAN.value} type="checkbox" name="saveCard" id="SaveCard" />
                             <label htmlFor="saveCard">Use this card for the next time purchase</label>
                         </div>
                         <AddButton loading={addCardLoading} onClick={toggleAddCard} loaderText="Adding Card" disabled={cardAdded} disabledText={"Card Added"} >Add Card</AddButton>
@@ -391,8 +416,6 @@ input {
 .creditcard svg#cardfront,
 .creditcard svg#cardback {
     width: 100%;
-    -webkit-box-shadow: 1px 5px 6px 0px black;
-    box-shadow: 1px 5px 6px 0px black;
     border-radius: 22px;
 }
 
@@ -630,6 +653,12 @@ input {
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
+
+.preload{
+    /* margin: 0 auto; */
+    margin-bottom: 40px;
+}
+
 `
 
 export default CreditCard;

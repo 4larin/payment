@@ -11,13 +11,13 @@ const TotalOrder = (props) => {
         <div className="subtotal">
             <div className="subtotal__items">
                 <div className="subtotal__items__item">
-                    <h4>Subtotal</h4> <p>{currebcyFormatter.format(subtotal.itemsTotal).replace('NGN', "₦")}</p>
+                    <h4>Subtotal</h4> <h4>{currebcyFormatter.format(subtotal.itemsTotal).replace('NGN', "₦")}</h4>
                 </div>
                 <div className="subtotal__items__item">
-                    <h4>Estimated TAX</h4> <p>{currebcyFormatter.format((subtotal.tax / 100) * subtotal.itemsTotal).replace('NGN', "₦")}</p>
+                    <h4>Estimated TAX</h4> <h4>{currebcyFormatter.format((subtotal.tax / 100) * subtotal.itemsTotal).replace('NGN', "₦")}</h4>
                 </div>
                 <div className="subtotal__items__item">
-                    <h4>Promotional Code: <span className='promo-code--grey'>Z4KXLM9A</span></h4> <p>- {currebcyFormatter.format(subtotal.promo).replace('NGN', "₦")}</p>
+                    <h4>Promotional Code: <span className='promo-code--grey'>Z4KXLM9A</span></h4> <h4>- {currebcyFormatter.format(subtotal.promo).replace('NGN', "₦")}</h4>
                 </div>
             </div>
         </div>

@@ -10,7 +10,11 @@ const SectionLayout = (props) => {
 const StyledSection = styled.section`
 @media (max-width: 768px) {
     flex-direction: column;
-  padding: 16px 20px ;
+    padding: 16px 20px ;
+    div{
+        display: flex;
+        justify-content: center;
+    }
 
   }
   padding: 20px 80px ;
