@@ -1,15 +1,12 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import Appbar from './components/Appbar/Appbar';
-import Button from './components/Button/Button';
-import { currebcyFormatter } from './Utils/CurrencyFormatter'
 import PaymentModal from './components/Modal/PaymentModal';
 import CreditCard from './components/CreditCard/CreditCard';
 import TotalOrder from './components/TotalOrder/TotalOrder';
+import styled from 'styled-components'
 
 function App() {
 
-  // Subtotal data
   let [subtotal] = useState({ itemsTotal: 2497, tax: 4.791349619543452, promo: 60 })
   let [cardLoading, setCardLoading] = useState(true);
   let [paymentLoading, setPaymentLoading] = useState(false);
@@ -28,7 +25,7 @@ function App() {
 
 
   return (
-    <Fragment >
+    <MyApp >
       <PaymentModal show={paymentModal} closeModal={() => setPaymentModal(false)} />
       <Appbar />
       <CreditCard />
@@ -41,21 +38,14 @@ function App() {
         subtotal={subtotal}
 
       />
-    </Fragment>
+    </MyApp>
 
   );
 }
 
-
-
-const Section = styled.section`
-  
-  
-
- 
-
-
- 
+const MyApp = styled.div`
+  max-width: 1440px;
+  margin: 0 auto;
 `
 
 export default App;

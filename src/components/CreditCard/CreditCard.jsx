@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SectionLayout from '../../layout/Section';
-import Button from '../Button/Button';
+import { AddButton } from '../Button/Button';
+import Master from '../../assets/master.png'
+import Paypal from '../../assets/paypal.png'
 
 const CreditCard = () => {
+
+    let [addCardLoading, setAddCardLoading] = useState(false);
+    let [cardAdded, setCardAdded] = useState(false)
+
+
+    const toggleAddCard = () => {
+        setAddCardLoading((prevState) => !prevState)
+
+        const timer = setTimeout(() => {
+            setAddCardLoading(false)
+            setCardAdded(true)
+        }, 5000);
+        return () => clearTimeout(timer);
+    }
 
     let [cardPAN, setCardPAN] = useState({
         creditCardNumber: "XXXX XXXX XXXX XXXX",
@@ -39,7 +55,15 @@ const CreditCard = () => {
                     <p>Choose your method of payment</p>
                 </div>
                 <div className='payment__header__types'>
-                    visa verve
+                    <div className='payment__header__types____item'>
+                        <input type="radio" name="cardType" id="Card" />
+                        <label htmlFor="cardType"><img src={Master} alt="Master" height={16} /></label>
+                    </div>
+                    <div className='payment__header__types__item'>
+                        <input type="radio" name="cardType" id="Paypal" />
+                        <label htmlFor="cardType"><img src={Paypal} alt="Paypal" height={18} /></label>
+                    </div>
+
                 </div>
             </div>
             <div className="payment__body">
@@ -183,7 +207,7 @@ const CreditCard = () => {
                             <input type="radio" name="saveCard" id="SaveCard" />
                             <label htmlFor="saveCard">Use this card for the next time purchase</label>
                         </div>
-                        <Button>Add Card</Button>
+                        <AddButton loading={addCardLoading} onClick={toggleAddCard} loaderText="Adding Card" disabled={cardAdded} disabledText={"Card Added"} >Add Card</AddButton>
                     </form>
                 </div>
             </div>
@@ -206,6 +230,17 @@ const Section = styled(SectionLayout)`
           font-size: 15px;
           color: #9da3ac;
         }
+      }
+      &__types{
+          display: flex;
+          &__item{
+            margin: 0 24px;
+            label{
+                margin: 0;
+                margin-left: 2px;
+
+            }
+          }
       }
     }
     &__body{
@@ -248,7 +283,6 @@ const Section = styled(SectionLayout)`
             display: flex;
             flex-direction: column;
             flex-grow: 999;
-            max-width: 322px;
             margin-bottom:24px;
 
             &--radio{

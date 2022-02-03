@@ -3,10 +3,20 @@ import styled from 'styled-components';
 import PullseLoader from 'react-spinners/PulseLoader'
 
 const Button = (props) => {
-    return <StyledButton {...props}>{props.loading ? <>{props.loaderText}<PullseLoader color={'#f8f8f8'} loading={props.loading} size={12} /></> : props.children}
-
-    </StyledButton>;
+    return <StyledButton {...props}>{props.loading ? <>{props.loaderText}<PullseLoader color={'#f8f8f8'} loading={props.loading} size={12} /></> : props.children}</StyledButton>;
 };
+
+
+
+export const AddButton = (props) => {
+    return (
+        props.disabled ?
+            <StyledButton style={{ backgroundColor: 'grey', cursor: "not-allowed" }} {...props}>{props.disabledText}</StyledButton> :
+            props.loading ?
+                <StyledButton {...props}>{props.loaderText}<PullseLoader color={'#f8f8f8'} loading={props.loading} size={12} /></StyledButton> :
+                <StyledButton {...props}>{props.children}</StyledButton>
+    )
+}
 
 const StyledButton = styled.button`
     outline: none;
