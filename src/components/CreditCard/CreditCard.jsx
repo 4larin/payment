@@ -26,7 +26,7 @@ const CreditCard = () => {
     }
 
     let [cardPAN, setCardPAN] = useState({
-        creditCardNumber: 'xxxx xxxx xxxx',
+        creditCardNumber: 'XXXX XXXX XXXX XXXX',
         name: "Olatunji Folarin",
         expirationdate: "03/24",
         securitycode: '227',
