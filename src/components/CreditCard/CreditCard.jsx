@@ -10,6 +10,10 @@ const CreditCard = () => {
     let [addCardLoading, setAddCardLoading] = useState(false);
     let [cardAdded, setCardAdded] = useState(false)
 
+    const colors = ['grey', 'green', 'lightblue', 'red', 'cyan']
+
+    let [cardColor, setCardColor] = useState(colors[0])
+
 
     const toggleAddCard = () => {
         setAddCardLoading((prevState) => !prevState)
@@ -22,7 +26,7 @@ const CreditCard = () => {
     }
 
     let [cardPAN, setCardPAN] = useState({
-        creditCardNumber: 'null',
+        creditCardNumber: 'xxxx xxxx xxxx',
         name: "Olatunji Folarin",
         expirationdate: "03/24",
         securitycode: '227',
@@ -90,11 +94,11 @@ const CreditCard = () => {
                                                 <g id="CardBackground">
                                                     <g id="Page-1_1_">
                                                         <g id="amex_1_">
-                                                            <path id="Rectangle-1_1_" className="lightcolor grey" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
+                                                            <path id="Rectangle-1_1_" className={cardColor ? `lightcolor ${cardColor}` : "lightcolor grey"} d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
                             C0,17.9,17.9,0,40,0z" />
                                                         </g>
                                                     </g>
-                                                    <path className="darkcolor greydark" d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
+                                                    <path className={cardColor ? `darkcolor ${cardColor}dark` : "darkcolor greydark"} d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
                                                 </g>
                                                 <text transform="matrix(1 0 0 1 60.106 295.0121)" id="svgnumber" className="st2 st3 st4">{cardPAN.creditCardNumber}</text>
                                                 <text transform="matrix(1 0 0 1 54.1064 428.1723)" id="svgname" className="st2 st5 st6">{cardPAN.name}</text>
