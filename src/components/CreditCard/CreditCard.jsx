@@ -45,17 +45,12 @@ const CreditCard = () => {
         })
     }
 
-    function handleKeyPress(e) {
-        console.log('pressed');
 
+    function handleKeyPress(e) {
+        let re = /^[0-9\b]+$/
+        if (!re.test(e.key))
+            e.preventDefault()
     }
-    // function handleKeyPress(e) {
-    //     let re = /^[0-9\b]+$/
-    //     console.log(e)
-    //     if (!re.test(e.key))
-    //         e.preventDefault()
-    //     console.log('object');
-    // }
 
 
     let [flipped, setFlipped] = useState(false)
