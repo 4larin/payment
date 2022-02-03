@@ -38,7 +38,7 @@ const CreditCard = () => {
         setCardPAN((prevState) => {
             let finalValue = ''
             if (value)
-                finalValue = value.match(/.{1,4}/g).join('/')
+                finalValue = value.match(/.{1,4}/g).join(' ')
             return (
                 { ...prevState, [inputName]: finalValue }
             )
@@ -194,7 +194,7 @@ const CreditCard = () => {
                                     onFocus={() => setFlipped(false)}
                                     onChange={(e) => handleSetCardPAN(e.target.name, e.target.value, e)}
                                     placeholder={cardPAN.creditCardNumber}
-                                    id="creditCardNumber" type="text" inputMode="numeric" name='creditCardNumber' maxLength={16}
+                                    id="creditCardNumber" type="text" inputMode="numeric" name='creditCardNumber' maxLength={20}
                                 />
                             </div>
                             <div className="payment__body__form__form-item">
@@ -527,7 +527,7 @@ input {
 }
 
 #cardfront .st4 {
-    font-size: 54.7817px;
+    font-size: 48.7817px;
 }
 
 #cardfront .st5 {
