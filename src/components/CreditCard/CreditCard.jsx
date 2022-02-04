@@ -12,7 +12,7 @@ const CreditCard = () => {
 
     const colors = ['grey', 'green', 'lightblue', 'red', 'cyan']
 
-    let [cardColor, setCardColor] = useState(colors[0])
+    let [cardColor] = useState(colors[0])
 
 
     const toggleAddCard = () => {
